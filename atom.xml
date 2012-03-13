@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Elven's Blog]]></title>
   <link href="http://elvencao.github.com/atom.xml" rel="self"/>
   <link href="http://elvencao.github.com/"/>
-  <updated>2012-03-13T13:29:22+08:00</updated>
+  <updated>2012-03-13T14:13:38+08:00</updated>
   <id>http://elvencao.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Fei Cao]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[First Post]]></title>
+    <link href="http://elvencao.github.com/blog/2012/03/13/first-post/"/>
+    <updated>2012-03-13T14:06:00+08:00</updated>
+    <id>http://elvencao.github.com/blog/2012/03/13/first-post</id>
+    <content type="html"><![CDATA[<p>This is the first post on Github Pages, by using Octopress.</p>
+]]></content>
+  </entry>
   
 </feed>
