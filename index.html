@@ -9,8 +9,7 @@
   <meta name="author" content="Fei Cao">
 
   
-  <meta name="description" content="This is the first post on Github Pages, by using Octopress.
-">
+  <meta name="description" content="I have setup octopress for github pages before in another labtop. Now I want to use octopress in an new labtop for the previous github pages. I tried &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,72 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/05/15/re-setup-octopress-with-existing-github-pages/">Re-setup Octopress With Existing Github Pages</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-15T23:36:00+08:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have setup octopress for github pages before in another labtop. Now I want to use octopress in an new labtop for the previous github pages. I tried this.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress    
+</span><span class='line'>cd octopress     
+</span><span class='line'>git remote rename origin octopress   
+</span><span class='line'>git remote add origin git@github.com:myname/    myname.github.com.git    
+</span><span class='line'>git config branch.master.remote origin        
+</span><span class='line'>git branch -m master source    
+</span><span class='line'>git pull origin source    
+</span><span class='line'>mkdir _deploy    
+</span><span class='line'>cd _deploy/    
+</span><span class='line'>git init   
+</span><span class='line'>git remote add origin git@github.com:myname/    myname.github.com.git   
+</span><span class='line'>git pull origin master   </span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+Not sure it will work or not. <br/>
+Let me deploy and see.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/03/13/first-post/">First Post</a></h1>
     
     
@@ -113,6 +178,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/05/15/re-setup-octopress-with-existing-github-pages/">Re-setup octopress with existing github pages</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/03/13/first-post/">First Post</a>
       </li>
     
@@ -128,15 +197,6 @@
   <p><a href="http://delicious.com/elvencao">My Delicious Bookmarks &raquo;</a></p>
 </section>
 
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/elvencao?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
 
 
 
