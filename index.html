@@ -9,7 +9,8 @@
   <meta name="author" content="Fei Cao">
 
   
-  <meta name="description" content="I have setup octopress for github pages before in another labtop. Now I want to use octopress in an new labtop for the previous github pages. I tried &hellip;">
+  <meta name="description" content="How can I display a date picker controller instead of default keyboard on tap of a text field?
+UITextField is a subclass of UIResponder, which means &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,149 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/05/16/how-to-elegantly-replace-iphone-keyboard-with-uidatepicker/">How to Elegantly Replace iPhone Keyboard With UIDatePicker</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-16T15:32:00+08:00" pubdate data-updated="true">May 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>How can I display a date picker controller instead of default keyboard on tap of a text field?<br/>
+<code>UITextField</code> is a subclass of <code>UIResponder</code>, which means it has a <code>inputView</code> property. Just
+simply create a <code>UIDatePicker</code>, set it to be the text field&#8217;s <code>inputView</code>, and that&#8217;s done.<br/>
+It also has a <code>inputAccessoryView</code> property. This can be used to be set with a toolbar view
+and also with some toolbar buttons to perform done or cancel accessory operations. <br/>
+<strong>Example</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@interface</span> <span class="nc">CustomKeyboardAppDelegate</span> : <span class="nc">NSObject</span> <span class="o">&lt;</span><span class="n">UIApplicationDelegate</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIWindow</span> <span class="o">*</span><span class="n">window</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UITextField</span> <span class="o">*</span><span class="n">textField</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIToolbar</span> <span class="o">*</span><span class="n">accessoryView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="n">UIDatePicker</span> <span class="o">*</span><span class="n">datePicker</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">doneEditing:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">cancelEditing:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+In Interface Builder, pull out <code>UIDatePicker</code> and <code>UIToolbar</code> to the controller&#8217;s scene dock
+(not the controller&#8217;s view scene). And then pull out two toolbar buttons for done and cancel
+into toolbar. Connect the outlets appropriately. Connect <code>Cancel</code> button to <code>cancelEditing</code>
+and <code>Done</code> button to <code>doneEditing</code>. <code>Done</code> button will set the seleted date value to the
+text field and then dissmiss date picker. <code>Cancel</code> button will just dismiss date picker.
+The methods are implemented as listed below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">@implementation</span> <span class="nc">CustomKeyboardAppDelegate</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">window</span><span class="o">=</span><span class="n">_window</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">textField</span> <span class="o">=</span> <span class="n">_textField</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">accessoryView</span> <span class="o">=</span> <span class="n">_accessoryView</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">datePicker</span> <span class="o">=</span> <span class="n">_datePicker</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">launchOptions</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">textField</span><span class="p">.</span><span class="n">inputView</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">datePicker</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">textField</span><span class="p">.</span><span class="n">inputAccessoryView</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">accessoryView</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">doneEditing:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">textField</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">datePicker</span><span class="p">.</span><span class="n">date</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">textField</span> <span class="n">resignFirstResponder</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nl">cancelEditing:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">textField</span> <span class="n">resignFirstResponder</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+Setting the <code>autoresizingmask</code> of the <code>UIDatePicker</code> can make it work in landscape.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">datePicker</span><span class="p">.</span><span class="n">autoresizingMask</span> <span class="o">=</span> <span class="p">(</span><span class="n">UIViewAutoresizingFlexibleWidth</span> <span class="o">|</span> <span class="n">UIViewAutoresizingFlexibleHeight</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>References on Stackflow</strong><br/>
+1. <a href="http://stackoverflow.com/questions/6074683/display-datepicker-on-tapping-on-textfield">Display datepicker on tapping on textfield</a><br/>
+2. <a href="http://stackoverflow.com/questions/7721926/iphone-can-i-make-a-uidatepicker-appear-on-top-of-a-uikeyboard">iPhone: Can I make a UIDatePicker appear on top of a UIKeyboard?</a><br/>
+<strong>Other articles that are not praticed</strong><br/>
+1. <a href="http://stackoverflow.com/questions/1275633/elegantly-replace-iphone-keyboard-with-uipickerview">Elegantly replace iPhone keyboard with UIPickerView</a><br/>
+2. <a href="http://stackoverflow.com/questions/4824043/uidatepicker-pop-up-after-uibutton-is-pressed">UIDatePicker pop up after UIButton is pressed</a><br/>
+3. <a href="http://stackoverflow.com/questions/6269244/how-can-i-present-a-picker-view-just-like-the-keyboard-does">How can I present a picker view just like the keyboard does?</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/05/15/re-setup-octopress-with-existing-github-pages/">Re-setup Octopress With Existing Github Pages</a></h1>
     
     
@@ -85,8 +229,6 @@
 
 
 <time datetime="2012-05-15T23:36:00+08:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/15/re-setup-octopress-with-existing-github-pages/#disqus_thread">Comments</a>
         
       </p>
     
@@ -110,14 +252,14 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress    
 </span><span class='line'>cd octopress     
 </span><span class='line'>git remote rename origin octopress   
-</span><span class='line'>git remote add origin git@github.com:myname/    myname.github.com.git    
+</span><span class='line'>git remote add origin git@github.com:myname/myname.github.com.git    
 </span><span class='line'>git config branch.master.remote origin        
 </span><span class='line'>git branch -m master source    
 </span><span class='line'>git pull origin source    
 </span><span class='line'>mkdir _deploy    
 </span><span class='line'>cd _deploy/    
 </span><span class='line'>git init   
-</span><span class='line'>git remote add origin git@github.com:myname/    myname.github.com.git   
+</span><span class='line'>git remote add origin git@github.com:myname/myname.github.com.git   
 </span><span class='line'>git pull origin master   </span></code></pre></td></tr></table></div></figure>
 
 
@@ -154,8 +296,6 @@ Let me deploy and see.</p>
 
 <time datetime="2012-03-13T14:06:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/03/13/first-post/#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -180,6 +320,10 @@ Let me deploy and see.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/05/16/how-to-elegantly-replace-iphone-keyboard-with-uidatepicker/">How to elegantly replace iPhone keyboard with UIDatePicker</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/05/15/re-setup-octopress-with-existing-github-pages/">Re-setup octopress with existing github pages</a>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS | Elven's Blog]]></title>
+  <link href="http://elvencao.github.com/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://elvencao.github.com/"/>
+  <updated>2012-05-16T16:42:23+08:00</updated>
+  <id>http://elvencao.github.com/</id>
+  <author>
+    <name><![CDATA[Fei Cao]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to elegantly replace iPhone keyboard with UIDatePicker]]></title>
+    <link href="http://elvencao.github.com/blog/2012/05/16/how-to-elegantly-replace-iphone-keyboard-with-uidatepicker/"/>
+    <updated>2012-05-16T15:32:00+08:00</updated>
+    <id>http://elvencao.github.com/blog/2012/05/16/how-to-elegantly-replace-iphone-keyboard-with-uidatepicker</id>
+    <content type="html"><![CDATA[<p>How can I display a date picker controller instead of default keyboard on tap of a text field?<br/>
+<code>UITextField</code> is a subclass of <code>UIResponder</code>, which means it has a <code>inputView</code> property. Just
+simply create a <code>UIDatePicker</code>, set it to be the text field's <code>inputView</code>, and that's done.<br/>
+It also has a <code>inputAccessoryView</code> property. This can be used to be set with a toolbar view
+and also with some toolbar buttons to perform done or cancel accessory operations. <br/>
+<strong>Example</strong><br/>
+``` objective-c <br/>
+@interface CustomKeyboardAppDelegate : NSObject <UIApplicationDelegate> {<br/>
+...</p>
+
+<p>@property (nonatomic, retain) IBOutlet UIWindow <em>window;<br/>
+@property (nonatomic, retain) IBOutlet UITextField </em>textField;<br/>
+@property (nonatomic, retain) IBOutlet UIToolbar <em>accessoryView;<br/>
+@property (nonatomic, retain) IBOutlet UIDatePicker </em>datePicker;</p>
+
+<ul>
+<li>(IBAction)doneEditing:(id)sender;</li>
+<li>(IBAction)cancelEditing:(id)sender; <br/>
+@end<br/>
+<code>  
+In Interface Builder, pull out `UIDatePicker` and `UIToolbar` to the controller's scene dock
+(not the controller's view scene). And then pull out two toolbar buttons for done and cancel
+into toolbar. Connect the outlets appropriately. Connect `Cancel` button to `cancelEditing`
+and `Done` button to `doneEditing`. `Done` button will set the seleted date value to the
+text field and then dissmiss date picker. `Cancel` button will just dismiss date picker.
+The methods are implemented as listed below.   
+</code> objective-c <br/>
+@implementation CustomKeyboardAppDelegate</li>
+</ul>
+
+
+<p>@synthesize window=<em>window;<br/>
+@synthesize textField = </em>textField;<br/>
+@synthesize accessoryView = <em>accessoryView;<br/>
+@synthesize datePicker = </em>datePicker;</p>
+
+<ul>
+<li>(BOOL)application:(UIApplication <em>)application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions<br/>
+{<br/>
+  self.textField.inputView = self.datePicker;<br/>
+  self.textField.inputAccessoryView = self.accessoryView;<br/>
+  ...  <br/>
+}</li>
+</ul>
+
+
+<p>...</p>
+
+<ul>
+<li><p>(IBAction)doneEditing:(id)sender {<br/>
+  self.textField.text = [NSString stringWithFormat:@"%@", datePicker.date];<br/>
+  [self.textField resignFirstResponder];<br/>
+}</p></li>
+<li><p>(IBAction)cancelEditing:(id)sender {
+  [self.textField resignFirstResponder];<br/>
+}
+@end<br/>
+<code>``   
+Setting the</code>autoresizingmask<code>of the</code>UIDatePicker` can make it work in landscape.  <br/>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">datePicker</span><span class="p">.</span><span class="n">autoresizingMask</span> <span class="o">=</span> <span class="p">(</span><span class="n">UIViewAutoresizingFlexibleWidth</span> <span class="o">|</span> <span class="n">UIViewAutoresizingFlexibleHeight</span><span class="p">);</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div> <br/>
+<strong>References on Stackflow</strong></p></li>
+<li><a href="http://stackoverflow.com/questions/6074683/display-datepicker-on-tapping-on-textfield">Display datepicker on tapping on textfield</a></li>
+<li><a href="http://stackoverflow.com/questions/7721926/iphone-can-i-make-a-uidatepicker-appear-on-top-of-a-uikeyboard">iPhone: Can I make a UIDatePicker appear on top of a UIKeyboard?</a><br/>
+<strong>Other articles that are not praticed</strong></li>
+<li><a href="http://stackoverflow.com/questions/1275633/elegantly-replace-iphone-keyboard-with-uipickerview">Elegantly replace iPhone keyboard with UIPickerView</a></li>
+<li><a href="http://stackoverflow.com/questions/4824043/uidatepicker-pop-up-after-uibutton-is-pressed">UIDatePicker pop up after UIButton is pressed</a></li>
+<li><a href="http://stackoverflow.com/questions/6269244/how-can-i-present-a-picker-view-just-like-the-keyboard-does">How can I present a picker view just like the keyboard does?</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

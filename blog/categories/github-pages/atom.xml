@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Github Pages | Elven's Blog]]></title>
+  <link href="http://elvencao.github.com/blog/categories/github-pages/atom.xml" rel="self"/>
+  <link href="http://elvencao.github.com/"/>
+  <updated>2012-05-16T16:42:23+08:00</updated>
+  <id>http://elvencao.github.com/</id>
+  <author>
+    <name><![CDATA[Fei Cao]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Re-setup octopress with existing github pages]]></title>
+    <link href="http://elvencao.github.com/blog/2012/05/15/re-setup-octopress-with-existing-github-pages/"/>
+    <updated>2012-05-15T23:36:00+08:00</updated>
+    <id>http://elvencao.github.com/blog/2012/05/15/re-setup-octopress-with-existing-github-pages</id>
+    <content type="html"><![CDATA[<p>I have setup octopress for github pages before in another labtop. Now I want to use octopress in an new labtop for the previous github pages. I tried this.<br/>
+<code>
+git clone git://github.com/imathis/octopress.git octopress    
+cd octopress     
+git remote rename origin octopress   
+git remote add origin git@github.com:myname/myname.github.com.git    
+git config branch.master.remote origin        
+git branch -m master source    
+git pull origin source    
+mkdir _deploy    
+cd _deploy/    
+git init   
+git remote add origin git@github.com:myname/myname.github.com.git   
+git pull origin master   
+</code> <br/>
+Not sure it will work or not. <br/>
+Let me deploy and see.</p>
+]]></content>
+  </entry>
+  
+</feed>
